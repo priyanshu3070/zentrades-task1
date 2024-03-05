@@ -2,14 +2,28 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css'; // Importing external CSS file
 
-function ProductCard({ product }) {
+function ProductTable({ products }) {
   return (
-    <div className="product-card">
-      <h3>{product.title}</h3>
-      <p>Subcategory: {product.subcategory}</p>
-      <p>Price: ${product.price}</p>
-      <p>Popularity: {product.popularity}</p>
-    </div>
+    <table className="product-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Subcategory</th>
+          <th>Price</th>
+          <th>Popularity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product, index) => (
+          <tr key={index}>
+            <td>{product.title}</td>
+            <td>{product.subcategory}</td>
+            <td>${product.price}</td>
+            <td>{product.popularity}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
@@ -41,10 +55,9 @@ function App() {
   }, []);
 
   return (
-    <div className="product-container">
-      {products.map((product, index) => (
-        <ProductCard key={index} product={product} />
-      ))}
+    <div className='bg-white'>
+     
+      <ProductTable products={products} />
     </div>
   );
 }
